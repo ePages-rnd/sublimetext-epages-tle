@@ -1,0 +1,343 @@
+// [PackageDev] target_format: plist, ext: tmLanguage
+{
+    "name": "HTML with TLEs",
+    "scopeName": "text.html.tle",
+    "fileTypes": ["tle"],
+    "uuid": "ec00b2eb-fffd-402d-b260-b3df7d21ca67",
+
+    "patterns": [
+        { "include": "#tles"},
+        { "include": "#html_tags" }
+    ],
+
+    "repository": {
+        "tle_specific": {
+            "patterns": [
+                {
+                    "name": "constant.numeric.tle",
+                    "match": ",|[0-9]+"
+                },
+                {
+                    "name": "keyword.operator.tle",
+                    "match": "(\\.|IN|NOT|EQ|AND|OR|LT|GT|NEQ|NNE|NGT|NLT|NLE|NGE|==|!=|<=|=>|<|>|NE)"
+                },
+                {
+                    "name": "string.quoted.double.tle",
+                    "begin": "\\\"",
+                    "end": "\\\""
+                }
+            ]
+        },
+
+        "tles": {
+            "patterns": [
+                {
+                    "name": "comment.block.tle",
+                    "begin": "#REM",
+                    "end": "#ENDREM"
+                },
+                {
+                    "name": "source.tle.function.special",
+                    "begin": "(#GET|#SET|#FORM_ERROR|#DEFINED|#FUNCTION|#INCLUDE|#CALCULATE)(\\()",
+                    "end": "\\)",
+                    "beginCaptures": {
+                        "1": { "name": "support.function.tle" },
+                        "2": { "name": "entity.name.function.tle" }
+                    },
+                    "endCaptures": {
+                        "0": { "name": "entity.name.function.tle" }
+                    },
+                    "patterns": [
+                        { "include": "#tle_specific" },
+                        { "include": "#tles" }
+                    ]
+                },
+                {
+                    "name": "source.tle.function",
+                    "begin": "#[A-Z][a-z][A-Za-z0-9_\\.]+\\(",
+                    "end": "\\)",
+                    "beginCaptures": {
+                        "0": { "name": "entity.name.function.tle" }
+                    },
+                    "endCaptures": {
+                        "0": { "name": "entity.name.function.tle" }
+                    },
+                    "patterns": [
+                        { "include": "#tle_specific" },
+                        { "include": "#tles" }
+                    ]
+                },
+                {
+                    "name": "source.tle.block.start",
+                    "begin": "#([A-Z_]+)\\s*\\(",
+                    "end": "\\)",
+                    "beginCaptures": {
+                        "0": { "name": "keyword.control.tle" }
+                    },
+                    "endCaptures": {
+                        "0": { "name": "keyword.control.tle" }
+                    },
+                    "patterns": [
+                        { "include": "#tle_specific" },
+                        { "include": "#tles" }
+                    ]
+                },
+                {
+                    "name": "source.tle.block.mid",
+                    "match": "#ELSE",
+                    "captures": {
+                        "0": { "name": "keyword.control.tle" }
+                    }
+                },
+                {
+                    "name": "source.tle.block.end",
+                    "match": "#END[A-Z_]+",
+                    "captures": {
+                        "0": { "name": "keyword.control.tle" }
+                    }
+                },
+                {
+                    "match": "(#THIS|#INPUT|#Object|#_|#System|#Session|#Shop|#FormErrors|#FormError_[A-Za-z0-9_]+|#FormError|#UNDEF)(\\.[A-Za-z][A-Za-z0-9_\\.]*)?(?:(\\[)([\\w\\s\\-_,]+)(\\]))?",
+                    "name": "source.tle.variable.special",
+                    "comment": "Standard variables like #Description with optional formatter",
+                    "captures": {
+                        "1": { "name": "variable.language.tle" },
+                        "2": { "name": "variable.other.tle" },
+                        "3": { "name": "variable.other.tle" },
+                        "4": { "name": "constant.other.tle" },
+                        "5": { "name": "variable.other.tle" }
+
+                    }
+                },
+                {
+                    "match": "(#[A-Za-z][A-Za-z0-9_\\.]*)(?:(\\[)([\\w\\s\\-_,]+)(\\]))?",
+                    "name": "source.tle.variable",
+                    "comment": "Standard variables like #Description with optional formatter",
+                    "captures": {
+                        "1": { "name": "variable.other.tle" },
+                        "2": { "name": "variable.other.tle" },
+                        "3": { "name": "constant.other.tle" },
+                        "4": { "name": "variable.other.tle" }
+
+                    }
+                },
+                {
+                    "name": "source.tle.languagetag",
+                    "match": "\\{[A-Za-z0-9_\\.]+\\}",
+                    "captures": {
+                        "0": { "name": "constant.other.tle" }
+                    }
+                }
+            ]
+        },
+
+
+
+        "string_double_quoted": {
+            "name": "string.quoted.double.html",
+            "begin": "\"",
+            "end": "\"",
+            "beginCaptures": {
+                "0": { "name": "punctuation.definition.string.begin.html" }
+            },
+            "endCaptures": {
+                "0": { "name": "punctuation.definition.string.end.html" }
+            },
+            "patterns": [
+                { "include": "#tles" }
+            ]
+        },
+        "string_single_quoted": {
+            "name": "string.quoted.single.html",
+            "begin": "'",
+            "end": "'",
+            "beginCaptures": {
+                "0": { "name": "punctuation.definition.string.begin.html" }
+            },
+            "endCaptures": {
+                "0": { "name": "punctuation.definition.string.end.html" }
+            },
+            "patterns": [
+                { "include": "#tles" }
+            ]
+        },
+        "tag_generic_attribute": {
+            "name": "entity.other.attribute-name.html",
+            "match": "\\b([a-zA-Z\\-:]+)",
+            "patterns": [
+                { "include": "#tles" }
+            ]
+        },
+        "tag_id_attribute": {
+            "name": "meta.attribute-with-value.id.html",
+            "begin": "\\b(id)\\b\\s*(=)",
+            "end": "(?<=''|\")",
+            "captures": {
+                "1": { "name": "entity.other.attribute-name.id.html" },
+                "2": { "name": "punctuation.separator.key-value.html" }
+            },
+            "patterns": [
+                {
+                    "name": "string.quoted.double.html",
+                    "contentName": "meta.toc-list.id.html",
+                    "begin": "\"",
+                    "end": "\"",
+                    "beginCaptures": {
+                        "0": { "name": "punctuation.definition.string.begin.html" }
+                    },
+                    "endCaptures": {
+                        "0": { "name": "punctuation.definition.string.end.html" }
+                    },
+                    "patterns": [
+                        { "include": "#tles" }
+                    ]
+                },
+                {
+                    "name": "string.quoted.single.html",
+                    "contentName": "meta.toc-list.id.html",
+                    "begin": "'",
+                    "end": "'",
+                    "beginCaptures": {
+                        "0": { "name": "punctuation.definition.string.begin.html" }
+                    },
+                    "endCaptures": {
+                        "0": { "name": "punctuation.definition.string.end.html" }
+                    },
+                    "patterns": [
+                        { "include": "#tles" }
+                    ]
+                }
+            ]
+        },
+        "html_tags": {
+            "patterns": [
+                {
+                    "name": "comment.block.html",
+                    "begin": "(<!--)",
+                    "end": "(-->)",
+                    "beginCaptures": {
+                        "1": { "name": "punctuation.definition.comment.html" }
+                    },
+                    "endCaptures": {
+                        "1": { "name": "punctuation.definition.comment.html" }
+                    },
+                    "patterns": [
+                        { "match": "." },
+                        { "name": "invalid.illegal.bad-comments-or-CDATA.html"}
+                    ]
+                },
+                {
+                    "name": "meta.tag.any.html",
+                    "begin": "(<)([a-zA-Z0-9:]++)(?=[^>]*></\\2>)",
+                    "end": "(>)(<)(/)(\\2)(>)",
+                    "beginCaptures": {
+                        "1": { "name": "punctuation.definition.tag.begin.html" },
+                        "2": { "name": "entity.name.tag.html" }
+                    },
+                    "endCaptures": {
+                        "1": { "name": "punctuation.definition.tag.end.html" },
+                        "2": { "name": "punctuation.definition.tag.begin.html meta.scope.between-tag-pair.html" },
+                        "3": { "name": "punctuation.definition.tag.begin.html" },
+                        "4": { "name": "entity.name.tag.html" },
+                        "5": { "name": "punctuation.definition.tag.end.html" }
+                    },
+                    "patterns": [
+                        { "include": "#tag_stuff" },
+                        { "include": "#tles" }
+                    ]
+                },
+                {
+                    "name": "meta.tag.structure.any.html",
+                    "begin": "(</?)((?i:body|head|html)\\b)",
+                    "end": "(>)",
+                    "captures": {
+                        "1": { "name": "punctuation.definition.tag.begin.html" },
+                        "2": { "name": "entity.name.tag.structure.any.html" }
+                    },
+                    "endCaptures": { "1": { "name": "punctuation.definition.tag.end.html" } },
+                    "patterns": [
+                        { "include": "#tag_stuff" },
+                        { "include": "#tles" }
+                    ]
+                },
+                {
+                    "name": "meta.tag.block.any.html",
+                    "begin": "(</?)((?i:address|blockquote|dd|div|dl|dt|fieldset|form|frame|frameset|h1|h2|h3|h4|h5|h6|iframe|noframes|object|ol|p|ul|applet|center|dir|hr|menu|pre)\\b)",
+                    "end": "(>)",
+                    "beginCaptures": {
+                        "1": { "name": "punctuation.definition.tag.begin.html" },
+                        "2": { "name": "entity.name.tag.block.any.html" }
+                    },
+                    "endCaptures": { "1": { "name": "punctuation.definition.tag.end.html" } },
+                    "patterns": [
+                        { "include": "#tag_stuff" },
+                        { "include": "#tles" }
+                    ]
+                },
+                {
+                    "name": "meta.tag.inline.any.html",
+                    "begin": "(</?)((?i:a|abbr|acronym|area|b|base|basefont|bdo|big|br|button|caption|cite|code|col|colgroup|del|dfn|em|font|head|html|i|img|input|ins|isindex|kbd|label|legend|li|link|map|meta|noscript|optgroup|option|param|q|s|samp|script|select|small|span|strike|strong|style|sub|sup|table|tbody|td|textarea|tfoot|th|thead|title|tr|tt|u|var)\\b)",
+                    "end": "((?: ?/)?>)",
+                    "beginCaptures": {
+                        "1": { "name": "punctuation.definition.tag.begin.html" },
+                        "2": { "name": "entity.name.tag.inline.any.html" }
+                    },
+                    "endCaptures": {
+                        "1": { "name": "punctuation.definition.tag.end.html" }
+                    },
+                    "patterns": [
+                        { "include": "#tag_stuff" },
+                        { "include": "#tles" }
+                    ]
+                },
+                {
+                    "name": "meta.tag.other.html",
+                    "begin": "(</?)([!a-zA-Z0-9:]+)",
+                    "end": "(>)",
+                    "beginCaptures": {
+                        "1": { "name": "punctuation.definition.tag.begin.html" },
+                        "2": { "name": "entity.name.tag.other.html" }
+                    },
+                    "endCaptures": { "1": { "name": "punctuation.definition.tag.end.html" } },
+                    "patterns": [
+                        { "include": "#tag_stuff" },
+                        { "include": "#tles" }
+                    ]
+                },
+                {
+                    "include": "#entities" },
+                    { "name": "invalid.illegal.incomplete.html",
+                    "match": "<>"
+                },
+                {
+                    "name": "invalid.illegal.bad-angle-bracket.html",
+                    "match": "<"
+                }
+            ]
+        },
+        "entities": {
+            "patterns": [
+                {
+                    "name": "constant.character.entity.html",
+                    "match": "(&)([a-zA-Z0-9]+|#[0-9]+|#x[0-9a-fA-F]+)(;)",
+                    "captures": {
+                        "1": { "name": "punctuation.definition.entity.html" },
+                        "3": { "name": "punctuation.definition.entity.html" }
+                    }
+                },
+                {
+                    "name": "invalid.illegal.bad-ampersand.html",
+                    "match": "&"
+                }
+            ]
+        },
+        "tag_stuff": {
+            "patterns": [
+                { "include": "#tag_id_attribute" },
+                { "include": "#tag_generic_attribute" },
+                { "include": "#string_double_quoted" },
+                { "include": "#string_single_quoted" }
+            ]
+        }
+    }
+}
