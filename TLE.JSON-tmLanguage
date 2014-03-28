@@ -25,6 +25,21 @@
                     "name": "string.quoted.double.tle",
                     "begin": "\\\"",
                     "end": "\\\""
+                },
+                {
+                    "name": "source.tle.logicalgroup",
+                    "begin": "\\(",
+                    "end": "\\)",
+                    "beginCaptures": {
+                        "0": { "name": "keyword.operator.tle" }
+                    },
+                    "endCaptures": {
+                        "0": { "name": "keyword.operator.tle" }
+                    },
+                    "patterns": [
+                        { "include": "#tle_specific" },
+                        { "include": "#tles" }
+                    ]
                 }
             ]
         },
@@ -97,7 +112,7 @@
                     }
                 },
                 {
-                    "match": "(#THIS|#INPUT|#Object|#_|#System|#Session|#Shop|#FormErrors|#FormError_[A-Za-z0-9_]+|#FormError|#UNDEF)(\\.[A-Za-z][A-Za-z0-9_\\.]*)?(?:(\\[)([\\w\\s\\-_,]+)(\\]))?",
+                    "match": "(#THIS|#INPUT|#Object|#_|#System|#Session|#Shop|#FormErrors|#FormError_[A-Za-z0-9_]+|#FormError|#UNDEF)(\\.[A-Za-z][A-Za-z0-9_\\.]*)?(?:(\\[)([\\w\\s\\-_,:]+)(\\]))?",
                     "name": "source.tle.variable.special",
                     "comment": "Standard variables like #Description with optional formatter",
                     "captures": {
@@ -110,7 +125,7 @@
                     }
                 },
                 {
-                    "match": "(#[A-Za-z][A-Za-z0-9_\\.]*)(?:(\\[)([\\w\\s\\-_,]+)(\\]))?",
+                    "match": "(#[A-Za-z][A-Za-z0-9_\\.]*)(?:(\\[)([\\w\\s\\-_,:]+)(\\]))?",
                     "name": "source.tle.variable",
                     "comment": "Standard variables like #Description with optional formatter",
                     "captures": {

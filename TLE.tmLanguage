@@ -544,6 +544,41 @@
 					<key>name</key>
 					<string>string.quoted.double.tle</string>
 				</dict>
+				<dict>
+					<key>begin</key>
+					<string>\(</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.operator.tle</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>\)</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.operator.tle</string>
+						</dict>
+					</dict>
+					<key>name</key>
+					<string>source.tle.logicalgroup</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#tle_specific</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#tles</string>
+						</dict>
+					</array>
+				</dict>
 			</array>
 		</dict>
 		<key>tles</key>
@@ -728,7 +763,7 @@
 					<key>comment</key>
 					<string>Standard variables like #Description with optional formatter</string>
 					<key>match</key>
-					<string>(#THIS|#INPUT|#Object|#_|#System|#Session|#Shop|#FormErrors|#FormError_[A-Za-z0-9_]+|#FormError|#UNDEF)(\.[A-Za-z][A-Za-z0-9_\.]*)?(?:(\[)([\w\s\-_,]+)(\]))?</string>
+					<string>(#THIS|#INPUT|#Object|#_|#System|#Session|#Shop|#FormErrors|#FormError_[A-Za-z0-9_]+|#FormError|#UNDEF)(\.[A-Za-z][A-Za-z0-9_\.]*)?(?:(\[)([\w\s\-_,:]+)(\]))?</string>
 					<key>name</key>
 					<string>source.tle.variable.special</string>
 				</dict>
@@ -759,7 +794,7 @@
 					<key>comment</key>
 					<string>Standard variables like #Description with optional formatter</string>
 					<key>match</key>
-					<string>(#[A-Za-z][A-Za-z0-9_\.]*)(?:(\[)([\w\s\-_,]+)(\]))?</string>
+					<string>(#[A-Za-z][A-Za-z0-9_\.]*)(?:(\[)([\w\s\-_,:]+)(\]))?</string>
 					<key>name</key>
 					<string>source.tle.variable</string>
 				</dict>
