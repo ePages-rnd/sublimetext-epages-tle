@@ -532,7 +532,7 @@
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>(\.|IN|NOT|EQ|AND|OR|LT|GT|NEQ|NNE|NGT|NLT|NLE|NGE|==|!=|&lt;=|=&gt;|&lt;|&gt;|NE)</string>
+					<string>(\.|IN|NOT|EQ|AND|OR|LT|GT|NEQ|NNE|NGT|NLT|NLE|NGE|==|!=|&lt;=|=&gt;|&lt;|&gt;|NE|/)</string>
 					<key>name</key>
 					<string>keyword.operator.tle</string>
 				</dict>
@@ -595,82 +595,7 @@
 				</dict>
 				<dict>
 					<key>begin</key>
-					<string>(#GET|#SET|#FORM_ERROR|#DEFINED|#FUNCTION|#INCLUDE|#CALCULATE)(\()</string>
-					<key>beginCaptures</key>
-					<dict>
-						<key>1</key>
-						<dict>
-							<key>name</key>
-							<string>support.function.tle</string>
-						</dict>
-						<key>2</key>
-						<dict>
-							<key>name</key>
-							<string>entity.name.function.tle</string>
-						</dict>
-					</dict>
-					<key>end</key>
-					<string>\)</string>
-					<key>endCaptures</key>
-					<dict>
-						<key>0</key>
-						<dict>
-							<key>name</key>
-							<string>entity.name.function.tle</string>
-						</dict>
-					</dict>
-					<key>name</key>
-					<string>source.tle.function.special</string>
-					<key>patterns</key>
-					<array>
-						<dict>
-							<key>include</key>
-							<string>#tle_specific</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#tles</string>
-						</dict>
-					</array>
-				</dict>
-				<dict>
-					<key>begin</key>
-					<string>#[A-Z][a-z][A-Za-z0-9_\.]+\(</string>
-					<key>beginCaptures</key>
-					<dict>
-						<key>0</key>
-						<dict>
-							<key>name</key>
-							<string>entity.name.function.tle</string>
-						</dict>
-					</dict>
-					<key>end</key>
-					<string>\)</string>
-					<key>endCaptures</key>
-					<dict>
-						<key>0</key>
-						<dict>
-							<key>name</key>
-							<string>entity.name.function.tle</string>
-						</dict>
-					</dict>
-					<key>name</key>
-					<string>source.tle.function</string>
-					<key>patterns</key>
-					<array>
-						<dict>
-							<key>include</key>
-							<string>#tle_specific</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#tles</string>
-						</dict>
-					</array>
-				</dict>
-				<dict>
-					<key>begin</key>
-					<string>#([A-Z_]+)\s*\(</string>
+					<string>#(IF|ELSIF|LOOP|LOCAL|WITH|WITH_LANGUAGE|WITH_ERROR|BLOCK|JOIN|MENU)\s*\(</string>
 					<key>beginCaptures</key>
 					<dict>
 						<key>0</key>
@@ -727,9 +652,84 @@
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>#END[A-Z_]+</string>
+					<string>#(ENDIF|ENDLOOP|ENDLOCAL|ENDWITH|ENDWITH_LANGUAGE|ENDWITH_ERROR|ENDBLOCK|ENDJOIN|ENDMENU)</string>
 					<key>name</key>
 					<string>source.tle.block.end</string>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>(#GET|#SET|#FORM_ERROR|#DEFINED|#FUNCTION|#INCLUDE|#CALCULATE|#COMPARE|#FORMAT)(\()</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>support.function.tle</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>entity.name.function.tle</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>\)</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>entity.name.function.tle</string>
+						</dict>
+					</dict>
+					<key>name</key>
+					<string>source.tle.function.special</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#tle_specific</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#tles</string>
+						</dict>
+					</array>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>#[A-Za-z0-9_\.]+\(</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>entity.name.function.tle</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>\)</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>entity.name.function.tle</string>
+						</dict>
+					</dict>
+					<key>name</key>
+					<string>source.tle.function</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#tle_specific</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#tles</string>
+						</dict>
+					</array>
 				</dict>
 				<dict>
 					<key>captures</key>
