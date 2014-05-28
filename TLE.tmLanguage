@@ -763,7 +763,7 @@
 					<key>comment</key>
 					<string>Standard variables like #Description with optional formatter</string>
 					<key>match</key>
-					<string>(#THIS|#INPUT|#Object|#_|#System|#Session|#Shop|#FormErrors|#FormError_[A-Za-z0-9_]+|#FormError|#UNDEF)(\.[A-Za-z][A-Za-z0-9_\.]*)?(?:(\[)([\w\s\-_,:]+)(\]))?</string>
+					<string>(#THIS\b|#INPUT\b|#Object\b|#_\b|#System\b|#Session\b|#Shop\b|#FormErrors\b|#FormError_[A-Za-z0-9_]+\b|#FormError\b|#UNDEF\b)(\.[A-Za-z][A-Za-z0-9_\.]*)?(?:(\[)([\w\s\-_,:]+)(\]))?</string>
 					<key>name</key>
 					<string>source.tle.variable.special</string>
 				</dict>

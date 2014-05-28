@@ -154,7 +154,7 @@
                     ]
                 },
                 {
-                    "match": "(#THIS|#INPUT|#Object|#_|#System|#Session|#Shop|#FormErrors|#FormError_[A-Za-z0-9_]+|#FormError|#UNDEF)(\\.[A-Za-z][A-Za-z0-9_\\.]*)?(?:(\\[)([\\w\\s\\-_,:]+)(\\]))?",
+                    "match": "(#THIS\\b|#INPUT\\b|#Object\\b|#_\\b|#System\\b|#Session\\b|#Shop\\b|#FormErrors\\b|#FormError_[A-Za-z0-9_]+\\b|#FormError\\b|#UNDEF\\b)(\\.[A-Za-z][A-Za-z0-9_\\.]*)?(?:(\\[)([\\w\\s\\-_,:]+)(\\]))?",
                     "name": "source.tle.variable.special",
                     "comment": "Standard variables like #Description with optional formatter",
                     "captures": {
