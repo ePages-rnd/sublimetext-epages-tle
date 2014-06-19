@@ -21,6 +21,62 @@
 	</array>
 	<key>repository</key>
 	<dict>
+		<key>data_js</key>
+		<dict>
+			<key>begin</key>
+			<string>\b(data-js)\b\s*(=)(")</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>entity.other.attribute-name.datajs.html</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.separator.key-value.html</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.string.begin.html</string>
+				</dict>
+			</dict>
+			<key>contentName</key>
+			<string>source.js.embedded.html</string>
+			<key>end</key>
+			<string>(")</string>
+			<key>endCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.string.end.html</string>
+				</dict>
+			</dict>
+			<key>name</key>
+			<string>meta.data-js.html</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#string_single_quoted_js</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#string_double_quoted_js</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>source.js</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#tles</string>
+				</dict>
+			</array>
+		</dict>
 		<key>entities</key>
 		<dict>
 			<key>patterns</key>
@@ -470,6 +526,10 @@
 					<key>include</key>
 					<string>#tles</string>
 				</dict>
+				<dict>
+					<key>include</key>
+					<string>#entities</string>
+				</dict>
 			</array>
 		</dict>
 		<key>string_double_quoted_js</key>
@@ -533,6 +593,10 @@
 				<dict>
 					<key>include</key>
 					<string>#tles</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#entities</string>
 				</dict>
 			</array>
 		</dict>
@@ -679,6 +743,10 @@
 			<array>
 				<dict>
 					<key>include</key>
+					<string>#data_js</string>
+				</dict>
+				<dict>
+					<key>include</key>
 					<string>#tag_id_attribute</string>
 				</dict>
 				<dict>
@@ -770,7 +838,7 @@
 				</dict>
 				<dict>
 					<key>begin</key>
-					<string>#(IF|ELSIF|LOOP|LOCAL|WITH|WITH_LANGUAGE|WITH_ERROR|BLOCK|JOIN|MENU)\s*\(</string>
+					<string>#(IF|ELSIF|LOOP|LOCAL|WITH|WITH_LANGUAGE|WITH_ERROR|BLOCK|JOIN|MENU|GUI)\s*\(</string>
 					<key>beginCaptures</key>
 					<dict>
 						<key>0</key>
@@ -827,7 +895,7 @@
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>#(ENDIF|ENDLOOP|ENDLOCAL|ENDWITH|ENDWITH_LANGUAGE|ENDWITH_ERROR|ENDBLOCK|ENDJOIN|ENDMENU)</string>
+					<string>#(ENDIF|ENDLOOP|ENDLOCAL|ENDWITH|ENDWITH_LANGUAGE|ENDWITH_ERROR|ENDBLOCK|ENDJOIN|ENDMENU|ENDGUI)</string>
 					<key>name</key>
 					<string>source.tle.block.end</string>
 				</dict>

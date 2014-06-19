@@ -65,7 +65,7 @@
                 },
                 {
                     "name": "source.tle.block.start",
-                    "begin": "#(IF|ELSIF|LOOP|LOCAL|WITH|WITH_LANGUAGE|WITH_ERROR|BLOCK|JOIN|MENU)\\s*\\(",
+                    "begin": "#(IF|ELSIF|LOOP|LOCAL|WITH|WITH_LANGUAGE|WITH_ERROR|BLOCK|JOIN|MENU|GUI)\\s*\\(",
                     "end": "\\)",
                     "beginCaptures": {
                         "0": {
@@ -97,7 +97,7 @@
                 },
                 {
                     "name": "source.tle.block.end",
-                    "match": "#(ENDIF|ENDLOOP|ENDLOCAL|ENDWITH|ENDWITH_LANGUAGE|ENDWITH_ERROR|ENDBLOCK|ENDJOIN|ENDMENU)",
+                    "match": "#(ENDIF|ENDLOOP|ENDLOCAL|ENDWITH|ENDWITH_LANGUAGE|ENDWITH_ERROR|ENDBLOCK|ENDJOIN|ENDMENU|ENDGUI)",
                     "captures": {
                         "0": {
                             "name": "keyword.control.tle"
@@ -208,6 +208,42 @@
             ]
         },
 
+        "data_js": {
+            "name": "meta.data-js.html",
+            "begin": "\\b(data-js)\\b\\s*(=)(\")",
+            "end": "(\")",
+            "contentName": "source.js.embedded.html",
+            "beginCaptures": {
+                "1": {
+                    "name": "entity.other.attribute-name.datajs.html"
+                },
+                "2": {
+                    "name": "punctuation.separator.key-value.html"
+                },
+                "3": {
+                    "name": "punctuation.definition.string.begin.html"
+                }
+            },
+            "endCaptures": {
+                "1": {
+                    "name": "punctuation.definition.string.end.html"
+                }
+            },
+            "patterns": [
+                {
+                    "include": "#string_single_quoted_js"
+                },
+                {
+                    "include": "#string_double_quoted_js"
+                },
+                {
+                    "include": "source.js"
+                },
+                {
+                    "include": "#tles"
+                }
+            ]
+        },
         "string_double_quoted": {
             "name": "string.quoted.double.html",
             "begin": "\"",
@@ -225,6 +261,9 @@
             "patterns": [
                 {
                     "include": "#tles"
+                },
+                {
+                    "include": "#entities"
                 }
             ]
         },
@@ -245,12 +284,46 @@
             "patterns": [
                 {
                     "include": "#tles"
+                },
+                {
+                    "include": "#entities"
                 }
             ]
         },
-        "tag_generic_attribute": {
-            "name": "entity.other.attribute-name.html",
-            "match": "\\b([a-zA-Z\\-:]+)",
+        "string_double_quoted_js": {
+            "name": "string.quoted.double.js",
+            "begin": "\"",
+            "end": "\"",
+            "beginCaptures": {
+                "0": {
+                    "name": "punctuation.definition.string.begin.js"
+                }
+            },
+            "endCaptures": {
+                "0": {
+                    "name": "punctuation.definition.string.end.js"
+                }
+            },
+            "patterns": [
+                {
+                    "include": "#tles"
+                }
+            ]
+        },
+        "string_single_quoted_js": {
+            "name": "string.quoted.single.js",
+            "begin": "'",
+            "end": "'",
+            "beginCaptures": {
+                "0": {
+                    "name": "punctuation.definition.string.begin.js"
+                }
+            },
+            "endCaptures": {
+                "0": {
+                    "name": "punctuation.definition.string.end.js"
+                }
+            },
             "patterns": [
                 {
                     "include": "#tles"
@@ -311,6 +384,15 @@
                             "include": "#tles"
                         }
                     ]
+                }
+            ]
+        },
+        "tag_generic_attribute": {
+            "name": "entity.other.attribute-name.html",
+            "match": "\\b([a-zA-Z\\-:]+)",
+            "patterns": [
+                {
+                    "include": "#tles"
                 }
             ]
         },
@@ -517,46 +599,6 @@
                 }
             ]
         },
-        "string_double_quoted_js": {
-            "name": "string.quoted.double.js",
-            "begin": "\"",
-            "end": "\"",
-            "beginCaptures": {
-                "0": {
-                    "name": "punctuation.definition.string.begin.js"
-                }
-            },
-            "endCaptures": {
-                "0": {
-                    "name": "punctuation.definition.string.end.js"
-                }
-            },
-            "patterns": [
-                {
-                    "include": "#tles"
-                }
-            ]
-        },
-        "string_single_quoted_js": {
-            "name": "string.quoted.single.js",
-            "begin": "'",
-            "end": "'",
-            "beginCaptures": {
-                "0": {
-                    "name": "punctuation.definition.string.begin.js"
-                }
-            },
-            "endCaptures": {
-                "0": {
-                    "name": "punctuation.definition.string.end.js"
-                }
-            },
-            "patterns": [
-                {
-                    "include": "#tles"
-                }
-            ]
-        },
         "script": {
             "end": "(?<=<\/([sS][cC][rR][iI][pP][tT]))(>)(?:\\s*\\n)?",
             "begin": "(?:^\\s+)?(<)((?i:script))\\b(?![^>]*\/>)",
@@ -628,6 +670,9 @@
         },
         "tag_stuff": {
             "patterns": [
+                {
+                    "include": "#data_js"
+                },
                 {
                     "include": "#tag_id_attribute"
                 },
