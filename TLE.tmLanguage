@@ -24,7 +24,7 @@
 		<key>data_js</key>
 		<dict>
 			<key>begin</key>
-			<string>\b(data-js)\b\s*(=)(")</string>
+			<string>\b(data-js|data-sectoken)\b\s*(=)(")</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
@@ -895,7 +895,7 @@
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>#(ENDIF|ENDLOOP|ENDLOCAL|ENDWITH|ENDWITH_LANGUAGE|ENDWITH_ERROR|ENDBLOCK|ENDJOIN|ENDMENU|ENDGUI)</string>
+					<string>#(ENDIF|ENDLOOP|ENDLOCAL|ENDWITH_LANGUAGE|ENDWITH_ERROR|ENDWITH|ENDBLOCK|ENDJOIN|ENDMENU|ENDGUI)</string>
 					<key>name</key>
 					<string>source.tle.block.end</string>
 				</dict>

@@ -97,7 +97,7 @@
                 },
                 {
                     "name": "source.tle.block.end",
-                    "match": "#(ENDIF|ENDLOOP|ENDLOCAL|ENDWITH|ENDWITH_LANGUAGE|ENDWITH_ERROR|ENDBLOCK|ENDJOIN|ENDMENU|ENDGUI)",
+                    "match": "#(ENDIF|ENDLOOP|ENDLOCAL|ENDWITH_LANGUAGE|ENDWITH_ERROR|ENDWITH|ENDBLOCK|ENDJOIN|ENDMENU|ENDGUI)",
                     "captures": {
                         "0": {
                             "name": "keyword.control.tle"
@@ -210,7 +210,7 @@
 
         "data_js": {
             "name": "meta.data-js.html",
-            "begin": "\\b(data-js)\\b\\s*(=)(\")",
+            "begin": "\\b(data-js|data-sectoken)\\b\\s*(=)(\")",
             "end": "(\")",
             "contentName": "source.js.embedded.html",
             "beginCaptures": {
